@@ -12,7 +12,10 @@ dist/
 build/
 *.egg-info/
 node_modules/
-frontend/dist/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+frontend/*.tsbuildinfo
 .idea/
 .vscode/
 .DS_Store
