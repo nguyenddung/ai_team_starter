@@ -156,17 +156,20 @@ mypy src             # type-check (strict mode, xem pyproject.toml)
 
 ## 7. Frontend
 
+Frontend là ứng dụng Next.js (App Router, TypeScript).
+
 ```bash
 cd frontend
 npm install
-npm run dev       # chạy dev server Vite, mặc định http://localhost:5173
-npm run build      # build production vào frontend/dist
-npm run preview    # xem thử bản build
+npm run dev     # dev server, mặc định http://localhost:3000
+npm run build   # build production vào frontend/.next
+npm run start   # chạy bản production đã build
+npm run lint    # eslint (eslint-config-next)
 ```
 
 Frontend gọi API qua CORS; đảm bảo `CORS_ORIGINS` trong `.env` backend có
-chứa origin của frontend (mặc định đã cấu hình `http://localhost:3000`, đổi
-lại nếu Vite chạy ở cổng khác).
+chứa origin của frontend (mặc định `http://localhost:3000`, đúng port dev
+mặc định của Next.js nên không cần đổi gì khi mới bắt đầu).
 
 ## 8. Eval và training
 
