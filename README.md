@@ -65,6 +65,33 @@ ngoài) nên onboarding không cần API key. Để dùng provider thật, cập
 `AI_PROVIDER` và key tương ứng trong `.env`, sau đó thêm provider mới vào
 `src/ai/providers/factory.py`.
 
+### Multi-agent (TalentScreen)
+
+Mỗi agent là một file riêng trong `src/ai/agents/` với `SYSTEM_PROMPT` cố định
+và có route API riêng, dùng chung `AI_PROVIDER` đang cấu hình:
+
+```bash
+# Đối chiếu CV với JD
+curl -X POST http://localhost:8000/api/v1/agents/screener \
+  -H "Content-Type: application/json" \
+  -d '{"input":"CV: 3 năm Python.\nJD: yêu cầu 2+ năm Python."}'
+
+# Soạn câu hỏi phỏng vấn
+curl -X POST http://localhost:8000/api/v1/agents/interviewer \
+  -H "Content-Type: application/json" \
+  -d '{"input":"CV + JD vị trí Backend Developer"}'
+
+# Chấm điểm câu trả lời phỏng vấn
+curl -X POST http://localhost:8000/api/v1/agents/evaluator \
+  -H "Content-Type: application/json" \
+  -d '{"input":"Câu hỏi: ...\nTrả lời: ..."}'
+```
+
+Muốn thêm agent mới: tạo file trong `src/ai/agents/` (khai báo `SYSTEM_PROMPT`
+và `create_*_agent(provider)`), thêm dependency trong
+`src/api/dependencies.py` và route trong `src/api/routes/agents.py`. Chi tiết
+kiến trúc xem [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ## 3. Database và migration
 
 Mặc định dùng SQLite tại chỗ (`sqlite:///./app.db`), không cần cài thêm gì.
