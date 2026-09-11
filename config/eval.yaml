@@ -1,0 +1,5 @@
+dataset: eval/dataset.jsonl
+metrics:
+  - name: non_empty
+    threshold: 1.0
+
