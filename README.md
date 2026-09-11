@@ -31,6 +31,18 @@ source .venv/bin/activate
 python -m pip install -e ".[dev]"
 ```
 
+Nguồn khai báo dependency chính là `pyproject.toml`. Nếu công cụ/deploy
+platform của bạn cần `requirements.txt` (thay vì cài qua `pyproject.toml`),
+repo đã kèm sẵn:
+
+```bash
+pip install -r requirements.txt        # chỉ dependency chạy production
+pip install -r requirements-dev.txt    # thêm pytest, ruff, mypy cho dev
+```
+
+`requirements-dev.txt` tự include `requirements.txt`. Khi thêm/đổi version
+dependency, cập nhật cả `pyproject.toml` lẫn hai file này để không bị lệch.
+
 ## 2. Chạy backend
 
 ```bash
