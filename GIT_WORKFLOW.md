@@ -1,6 +1,6 @@
 # Git workflow
 
-Tài liệu này quy định cách cộng tác trên repository TalentScreen AI. Mục tiêu là
+Tài liệu này quy định cách cộng tác trên repository này. Mục tiêu là
 giữ `main` và `develop` luôn có thể build, kiểm thử và triển khai.
 
 ## Mô hình nhánh

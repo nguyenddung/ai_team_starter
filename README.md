@@ -65,26 +65,29 @@ ngoài) nên onboarding không cần API key. Để dùng provider thật, cập
 `AI_PROVIDER` và key tương ứng trong `.env`, sau đó thêm provider mới vào
 `src/ai/providers/factory.py`.
 
-### Multi-agent (TalentScreen)
+### Multi-agent
 
-Mỗi agent là một file riêng trong `src/ai/agents/` với `SYSTEM_PROMPT` cố định
-và có route API riêng, dùng chung `AI_PROVIDER` đang cấu hình:
+Đây là bộ khung multi-agent chung, chưa gắn với sản phẩm cụ thể nào. Mỗi
+agent là một file riêng trong `src/ai/agents/` với `SYSTEM_PROMPT` cố định
+và có route API riêng, dùng chung `AI_PROVIDER` đang cấu hình. Ba agent mẫu
+minh họa pipeline research → draft → review chung chung — đổi tên/nội dung
+prompt tùy sản phẩm thực tế sau này:
 
 ```bash
-# Đối chiếu CV với JD
-curl -X POST http://localhost:8000/api/v1/agents/screener \
+# Tổng hợp thông tin từ ngữ cảnh
+curl -X POST http://localhost:8000/api/v1/agents/researcher \
   -H "Content-Type: application/json" \
-  -d '{"input":"CV: 3 năm Python.\nJD: yêu cầu 2+ năm Python."}'
+  -d '{"input":"Ngữ cảnh cần tổng hợp..."}'
 
-# Soạn câu hỏi phỏng vấn
-curl -X POST http://localhost:8000/api/v1/agents/interviewer \
+# Soạn bản nháp nội dung
+curl -X POST http://localhost:8000/api/v1/agents/writer \
   -H "Content-Type: application/json" \
-  -d '{"input":"CV + JD vị trí Backend Developer"}'
+  -d '{"input":"Brief nội dung cần viết..."}'
 
-# Chấm điểm câu trả lời phỏng vấn
-curl -X POST http://localhost:8000/api/v1/agents/evaluator \
+# Review bản nháp
+curl -X POST http://localhost:8000/api/v1/agents/reviewer \
   -H "Content-Type: application/json" \
-  -d '{"input":"Câu hỏi: ...\nTrả lời: ..."}'
+  -d '{"input":"Bản nháp cần review..."}'
 ```
 
 Muốn thêm agent mới: tạo file trong `src/ai/agents/` (khai báo `SYSTEM_PROMPT`
