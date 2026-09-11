@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from src.ai.agents.base import Agent
-from src.api.dependencies import get_evaluator_agent, get_interviewer_agent, get_screener_agent
+from src.api.dependencies import get_researcher_agent, get_reviewer_agent, get_writer_agent
 from src.schemas.agents import AgentRequest, AgentResponse
 
 router = APIRouter()
@@ -12,25 +12,25 @@ async def _run(agent: Agent, request: AgentRequest) -> AgentResponse:
     return AgentResponse(agent=agent.name, output=output)
 
 
-@router.post("/screener", response_model=AgentResponse)
-async def screener(
+@router.post("/researcher", response_model=AgentResponse)
+async def researcher(
     request: AgentRequest,
-    agent: Agent = Depends(get_screener_agent),
+    agent: Agent = Depends(get_researcher_agent),
 ) -> AgentResponse:
     return await _run(agent, request)
 
 
-@router.post("/interviewer", response_model=AgentResponse)
-async def interviewer(
+@router.post("/writer", response_model=AgentResponse)
+async def writer(
     request: AgentRequest,
-    agent: Agent = Depends(get_interviewer_agent),
+    agent: Agent = Depends(get_writer_agent),
 ) -> AgentResponse:
     return await _run(agent, request)
 
 
-@router.post("/evaluator", response_model=AgentResponse)
-async def evaluator(
+@router.post("/reviewer", response_model=AgentResponse)
+async def reviewer(
     request: AgentRequest,
-    agent: Agent = Depends(get_evaluator_agent),
+    agent: Agent = Depends(get_reviewer_agent),
 ) -> AgentResponse:
     return await _run(agent, request)
