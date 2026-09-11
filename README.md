@@ -2,14 +2,14 @@
 
 Skeleton thực tế cho team xây dựng ứng dụng AI bằng Python. Project có API
 (FastAPI), abstraction cho model provider, điểm mở rộng RAG/data pipeline,
-database (SQLAlchemy + Alembic), eval, training, test, frontend (React +
-Vite) và CI/CD. Không tích hợp AI logging hoặc telemetry.
+database (SQLAlchemy + Alembic), eval, training, test, frontend (Next.js +
+TypeScript) và CI/CD. Không tích hợp AI logging hoặc telemetry.
 
 ## Yêu cầu hệ thống
 
 - Python 3.11 trở lên
 - Git
-- Node.js 18+ và npm (chỉ cần nếu làm frontend)
+- Node.js 20.9+ và npm (chỉ cần nếu làm frontend, yêu cầu của Next.js 16)
 - Docker + Docker Compose (tùy chọn, dùng khi muốn chạy kèm PostgreSQL)
 
 ## 1. Cài đặt backend
